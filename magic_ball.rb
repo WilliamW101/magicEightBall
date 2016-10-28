@@ -25,7 +25,7 @@ puts '--- Welcome to Magic 8 Ball ---'
 @clone = @default_answers.clone
 
 def main_menu
-  puts 'Select one of the following'
+  puts 'Select one of the following. Type Reset to clear added answers'
   puts '1. Ask Question(s)'
   puts '2. Add Answer(s)'
   puts '3. Quit'
@@ -49,11 +49,12 @@ end
 
 
 def ask_questions
-  puts 'Ask the ball whatever you would like, quit to end program.'
+  puts "\n\nAsk the ball whatever you would like, quit to end program."
   question = gets.strip.downcase
   should_quit?(question)
+  reset(question)
   puts @clone.sample
-  puts '---------------------------'
+  puts "---------------------------\n\n"
   ask_again
 end
 
@@ -65,18 +66,13 @@ def ask_again
     ask_questions
   when 'no', 'n', 'nope'
     main_menu
+  when 'reset'
+    reset(another)
   else
     puts 'Insert valid input'
     ask_again
   end
 end
-
-# def add_answers
-#   puts 'Add an answer!'
-#   add = gets.strip
-#   @clone << add
-#   add_another
-# end
 
 def add_answers
   puts 'Add an answer!'
@@ -99,6 +95,8 @@ def add_another
     add_answers
   when 'no', 'n', 'nope'
     main_menu
+  when 'reset'
+    reset(another)
   else
     puts 'Insert valid input'
     add_another
@@ -109,6 +107,14 @@ def should_quit?(thing)
   if thing == 'quit'
     puts 'Thank you for playing!'
     exit(0)
+  end
+end
+
+def reset(answers)
+  if answers == 'reset'
+    puts 'Resetting to default answers.'
+    @clone = @default_answers.clone
+    main_menu
   end
 end
 
@@ -126,8 +132,8 @@ loop
 # -- BONUS --
 # *ability to add more answers:
 # via easter egg question("add_answers")
-# do not let them add the same answer if the eightball already has it
-# ability to reset answers back to original bank(hint: think arr.clone)
+# *do not let them add the same answer if the eightball already has it
+# *ability to reset answers back to original bank(hint: think arr.clone)
 # via easter egg questoin ("reset_answers")
 # ability to have eightball print answers
 # via easter egg question ("print_answers")
