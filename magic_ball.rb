@@ -71,10 +71,23 @@ def ask_again
   end
 end
 
+# def add_answers
+#   puts 'Add an answer!'
+#   add = gets.strip
+#   @clone << add
+#   add_another
+# end
+
 def add_answers
   puts 'Add an answer!'
   add = gets.strip
-  @clone << add
+  if
+    @clone.include?(add) == true
+    puts 'Already an option, add someething else'
+  else
+    @clone << add
+    puts "#{add} successfully added"
+  end
   add_another
 end
 
@@ -111,7 +124,7 @@ loop
 
 
 # -- BONUS --
-# ability to add more answers:
+# *ability to add more answers:
 # via easter egg question("add_answers")
 # do not let them add the same answer if the eightball already has it
 # ability to reset answers back to original bank(hint: think arr.clone)
