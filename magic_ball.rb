@@ -1,6 +1,5 @@
 puts '--- Welcome to Magic 8 Ball ---'
 
-
 @default_answers = [
   "It's certain",
   "It's decidedly so",
@@ -28,7 +27,8 @@ def main_menu
   puts 'Select one of the following. Type Reset to clear added answers'
   puts '1. Ask Question(s)'
   puts '2. Add Answer(s)'
-  puts '3. Quit'
+  puts '3. View Answer(s)'
+  puts '4. Quit'
   menu_selection
 end
 
@@ -39,7 +39,9 @@ def menu_selection
     ask_questions
   when '2', 'add', 'add answer', 'add answer(s)'
     add_answers
-  when '3', 'quit', 'stop', 'exit'
+  when '3', 'view'
+    show_answers
+  when '4', 'quit', 'stop', 'exit'
     puts 'Thank you for playing!'
     exit(0)
   else
@@ -118,12 +120,16 @@ def reset(answers)
   end
 end
 
+def show_answers
+  puts "#{@clone}\n\n"
+  main_menu
+end
+
 
 def loop
   main_menu
   loop
 end
-
 
 loop
 
